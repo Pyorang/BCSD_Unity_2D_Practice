@@ -9,15 +9,12 @@ public class MyBall : MonoBehaviour
     void Start()
     {
         rigid = GetComponent<Rigidbody>();
-        //rigid.AddForce(Vector3.up * 50, ForceMode.Impulse);
     }
 
     // Update is called once per frame
     void Update()
     {
-        //rigid.velocity = new Vector3(2, 4, 5);
-
-        /*
+        
         if (Input.GetButtonDown("Jump"))
         {
             rigid.AddForce(Vector3.up * 25, ForceMode.Impulse);
@@ -25,9 +22,13 @@ public class MyBall : MonoBehaviour
         }
 
         Vector3 vec=new Vector3(Input.GetAxisRaw("Horizontal"),0,Input.GetAxisRaw("Vertical"));
-        rigid.AddForce(vec, ForceMode.Impulse);
-        */
+        rigid.AddForce(vec*0.1f, ForceMode.Impulse);
+        
+    }
 
-        rigid.AddTorque(Vector3.up);
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.name == "Cube")
+            rigid.AddForce(Vector3.up * 5, ForceMode.Impulse);
     }
 }
